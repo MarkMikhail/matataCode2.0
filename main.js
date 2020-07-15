@@ -63,7 +63,7 @@ document.addEventListener("mouseup", dragEnd);
 document.addEventListener("touchend", dragEnd);
 
 document.querySelector("#play").addEventListener("click", function(){
-    orders = "";
+    orders = [];
 
     boardContainer.classList.add("move");
     storeAnim.classList.add("move");
@@ -73,10 +73,10 @@ document.querySelector("#play").addEventListener("click", function(){
         block.classList.add("move");
 
         if (block.children[0].children.length) {
-            orders += block.children[0].children[0].dataset.command;
+            orders.push(block.children[0].children[0].dataset.command);
 
             if (block.children[1].children.length) {
-                orders += block.children[1].children[0].dataset.command;
+                orders.push(block.children[1].children[0].dataset.command);
             }
         }
     }
@@ -147,7 +147,7 @@ function dragProcess(ev){
                     if(ev.clientX > emptyRect.left & ev.clientX < emptyRect.right & ev.clientY > emptyRect.top & ev.clientY < emptyRect.bottom){
                         if (empty.children.length === 0){
                             if (empty.parentElement.children[0].children.length !== 0){
-                                if (empty.parentElement.children[0].children[0].dataset.command === "F" || empty.parentElement.children[0].children[0].dataset.command === "B"){
+                                if (empty.parentElement.children[0].children[0].dataset.command === "F" || empty.parentElement.children[0].children[0].dataset.command === "B" || empty.parentElement.children[0].children[0].dataset.command === "I"){
                                     empty.classList.add("hovered");
                                     targetOver = empty;
                                 }

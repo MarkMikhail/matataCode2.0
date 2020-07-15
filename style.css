@@ -213,6 +213,10 @@ body {
     height: 46%;
 }
 
+.storeContainer .store.extra {
+    height: 86%;
+}
+
 .storedOrder {
     /* width: 100%; */
     /* height: 100%; */
