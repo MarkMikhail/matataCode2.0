@@ -6,7 +6,7 @@ repeatNode(document.querySelector(".block"), 18, true);
 repeatNode(document.querySelector(".up"), 4, true);
 repeatNode(document.querySelector(".down"), 4, true);
 repeatNode(document.querySelector(".right"), 4, true);
-repeatNode(document.querySelector(".down"), 4, true);
+repeatNode(document.querySelector(".left"), 4, true);
 repeatNode(document.querySelector(".two"), 2, true);
 repeatNode(document.querySelector(".three"), 2, true);
 repeatNode(document.querySelector(".four"), 2, true);

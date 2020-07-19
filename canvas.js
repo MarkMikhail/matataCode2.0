@@ -118,6 +118,8 @@ function reset(){
 
     myRobot.penLine = new Path2D();
 
+    order = [];
+
     targetX = boardCanvas.grid.getx(1);
     targetY = boardCanvas.grid.gety(4);
     targetR = 0;
