@@ -1,6 +1,18 @@
 const board = document.querySelector(".board");
 
-drawBlocks();
+// drawBlocks();
+
+repeatNode(document.querySelector(".block"), 18, true);
+repeatNode(document.querySelector(".up"), 4, true);
+repeatNode(document.querySelector(".down"), 4, true);
+repeatNode(document.querySelector(".right"), 4, true);
+repeatNode(document.querySelector(".down"), 4, true);
+repeatNode(document.querySelector(".two"), 2, true);
+repeatNode(document.querySelector(".three"), 2, true);
+repeatNode(document.querySelector(".four"), 2, true);
+repeatNode(document.querySelector(".five"), 2, true);
+repeatNode(document.querySelector(".start"), 2, true);
+repeatNode(document.querySelector(".stop"), 2, true);
 
 const orderEmpty = document.querySelectorAll(".order");
 const numberEmpty = document.querySelectorAll(".block .number");
@@ -83,10 +95,10 @@ document.querySelector("#play").addEventListener("click", function(){
 
     order = orders;
 
-    stop();
-    setup();
+    // stop();
+    // setup();
 
-    drawInt = setInterval(draw, 1000/fps);
+    // drawInt = setInterval(draw, 1000/fps);
 })
 
 document.querySelector("#reset").addEventListener("click", function(){
@@ -96,12 +108,20 @@ document.querySelector("#reset").addEventListener("click", function(){
     for (block of blocks){
         block.classList.remove("move");
     }
+    reset();
 })
 
 function drawBlocks() {
-  for(var i = 0; i < 17; i++){
+  for(var i = 0; i < 18; i++){
     board.innerHTML += "<div class='block'><div class='order'></div><div class='number'></div></div>";
   }
+}
+
+function repeatNode(node, count, deep) {
+    for (var i = 0, copy; i < count - 1; i++) {
+        copy = node.cloneNode(deep);
+        node.parentNode.insertBefore(copy, node);
+    }
 }
 
 function dragStart(ev) {
