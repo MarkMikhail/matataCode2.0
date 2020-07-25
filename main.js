@@ -226,7 +226,7 @@ function dragEnd(ev){
 }
 
 const float = document.querySelector("#myCanvas");
-float.classList.add("float")
+float.classList.add("float");
 
 float.addEventListener("mousedown", floatDragStart);
 float.addEventListener("touchstart", floatDragStart);
