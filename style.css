@@ -261,7 +261,7 @@ body {
     position: relative;
     height: 0;
     border: 0vmin solid var(--dark-border);
-    transition: 0.4s;
+    transition: 0s;
     background: var(--light-fill);
 }
 
@@ -274,6 +274,6 @@ body {
     right: 10px;
     cursor: move;
     z-index: 2000;
-    transition: 0.4s;
+    transition: 0s;
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
