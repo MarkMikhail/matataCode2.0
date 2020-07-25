@@ -1,4 +1,4 @@
-// This file manages the canvas element in MatataCode
+// This file manages the canvas element in MatataCode with regards to animations and robot logic
 
 const boardCanvas = {
     canvas: document.getElementById("myCanvas"),

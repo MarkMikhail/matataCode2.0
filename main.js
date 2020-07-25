@@ -33,6 +33,7 @@ const tabs = document.querySelectorAll(".storeContainer");
 const mainStores = document.getElementById("stores");
 
 let isMouseDown = false;
+let floatSelected = false;
 let offset = [0, 0];
 let draggedElement = [];
 let targetOver;
@@ -222,4 +223,50 @@ function dragEnd(ev){
         draggedElement[0].style.pointerEvents = "auto";
         draggedElement.pop();
     }
+}
+
+const float = document.querySelector(".float");
+
+float.addEventListener("mousedown", floatDragStart);
+float.addEventListener("touchstart", floatDragStart);
+
+document.addEventListener("mousemove", floatDragProcess);
+document.addEventListener("touchmove", floatDragProcess);
+
+document.addEventListener("mouseup", floatDragEnd);
+document.addEventListener("touchend", floatDragEnd);
+
+function floatDragStart(ev) {
+    ev.preventDefault();
+    try {
+        ev = ev.targetTouches[0];
+    } catch {} finally {
+        floatSelected = true;
+        offset = [this.offsetLeft - ev.clientX, this.offsetTop - ev.clientY];
+    }
+}
+
+function floatDragProcess(ev){
+    ev.preventDefault();
+    try {
+        ev = ev.targetTouches[0];
+    } catch {} finally {
+        if (floatSelected) {
+            // console.log('event triggered');
+            float.style.top = ev.clientY + offset[1] + 'px';
+            // float.style.bottom = - parseInt(float.style.top) + 'px';
+
+            if (ev.clientX < window.innerWidth/2){
+                float.style.left = '10px';
+                float.style.right = null;
+            } else {
+                float.style.right = '10px';
+                float.style.left = null;
+            }
+        }
+    }
+}
+
+function floatDragEnd(ev){
+    floatSelected = false;
 }
