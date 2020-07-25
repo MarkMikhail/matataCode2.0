@@ -1,17 +1,4 @@
-const canvas = document.getElementById("myCanvas");
-const cn = canvas.getContext("2d");
-
-const grid_width = 5;
-const scale = canvas.width/grid_width;
-const start_pos = [scale*(1-0.5), scale*(4-0.5)];
-
-const fps = 25;
-const orderSpeed = 2;
-
-// Initialising position variables
-var targetX = start_pos[0];
-var targetY = start_pos[1];
-var targetR = 0;
+// This file manages the canvas element in MatataCode
 
 const boardCanvas = {
     canvas: document.getElementById("myCanvas"),
@@ -63,7 +50,14 @@ function robot(X, Y, R, color = 'orange', ) {
     this.x = X;
     this.y = Y;
     this.r = R;
+
+    this.Tx = X;
+    this.Ty = Y;
+    this.Tr = R;
+
     this.color = color;
+
+    this.speed = 0.02;
 
     this.penLine = new Path2D();
     this.penLine.moveTo(this.x, this.y);
@@ -120,16 +114,16 @@ function reset(){
 
     order = [];
 
-    targetX = boardCanvas.grid.getx(1);
-    targetY = boardCanvas.grid.gety(4);
-    targetR = 0;
+    myRobot.Tx = myRobot.x;
+    myRobot.Ty = myRobot.y;
+    myRobot.Tr = myRobot.r;
 }
 
 function newPos(){
 
-    errorY = Math.abs(targetY - myRobot.y);
-    errorX = Math.abs(targetX - myRobot.x);
-    errorR = Math.abs(targetR - myRobot.r);
+    errorY = Math.abs(myRobot.Ty - myRobot.y);
+    errorX = Math.abs(myRobot.Tx - myRobot.x);
+    errorR = Math.abs(myRobot.Tr - myRobot.r);
 
     if(errorX < 1 && errorY < 1 && errorR < 0.01){
 
@@ -161,8 +155,8 @@ function newPos(){
                         order.unshift(currOrder);
                     }
                 }
-                targetX += boardCanvas.grid.scale*Math.sin(myRobot.r);
-                targetY -= boardCanvas.grid.scale*Math.cos(myRobot.r);
+                myRobot.Tx += boardCanvas.grid.scale*Math.sin(myRobot.r);
+                myRobot.Ty -= boardCanvas.grid.scale*Math.cos(myRobot.r);
                 break;
             case "B":
                 if (!isNaN(order[0])){
@@ -172,8 +166,8 @@ function newPos(){
                         order.unshift(currOrder);
                     }
                 }
-                targetX -= boardCanvas.grid.scale*Math.sin(myRobot.r);
-                targetY += boardCanvas.grid.scale*Math.cos(myRobot.r);
+                myRobot.Tx -= boardCanvas.grid.scale*Math.sin(myRobot.r);
+                myRobot.Ty += boardCanvas.grid.scale*Math.cos(myRobot.r);
                 break;
             case "R":
                 if (!isNaN(order[0])){
@@ -182,7 +176,7 @@ function newPos(){
                 } else {
                     angle = Math.PI/2;
                 }
-                targetR += angle;
+                myRobot.Tr += angle;
                 break;
             case "L":
                 if (!isNaN(order[0])){
@@ -191,15 +185,15 @@ function newPos(){
                 } else {
                     angle = Math.PI/2;
                 }
-                targetR -= angle;
+                myRobot.Tr -= angle;
                 break;
             default:
                 // Do nothing
         }
 
-        moveX = (targetX - myRobot.x)/(fps*orderSpeed);
-        moveY = (targetY - myRobot.y)/(fps*orderSpeed);
-        moveR = (targetR - myRobot.r)/(fps*orderSpeed);
+        moveX = (myRobot.Tx - myRobot.x)*myRobot.speed;
+        moveY = (myRobot.Ty - myRobot.y)*myRobot.speed;
+        moveR = (myRobot.Tr - myRobot.r)*myRobot.speed;
 
     } else {
         myRobot.x += moveX;
